@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  
   def create
     @user = User.new(user_params)
    if @user.save
@@ -19,7 +20,7 @@ class UsersController < ApplicationController
     if @user == current_user
       render "edit"
     else
-      redirect_to users_path
+      redirect_to user_path(current_user)
     end
  end
 
@@ -42,6 +43,7 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :introduction, :profile_image)
   end
+  
 
 end
 

@@ -22,7 +22,9 @@
              <!--bookを使って特定の情報を出してる-->
           <tr>
           <td>
-             <%= attachment_image_tag @user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg"  %>
+             <%= link_to user_path(@user.id) do %>
+             <%= attachment_image_tag @user, :profile_image, size: "40x40", fallback: "no_image.jpg"  %>
+             <% end %>
           </td>
           <td>
             <%= link_to book_path(book.id) do %>

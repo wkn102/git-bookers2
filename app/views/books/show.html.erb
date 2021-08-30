@@ -4,7 +4,7 @@
 <div class="container px-5 px-sm-0">
 <div class="row">
   <div class="col-md-3">
-    <%= render 'books/list', user:@user, book:@book %>
+    <%= render 'books/list', user:@user, book:@books %>
   </div>
 <div class="col-md-8 offset-md-1">
   <h2>Book detail</h2>
@@ -12,14 +12,12 @@
     <tbody>
       <tr>
         <td>
-          <%= attachment_image_tag @user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg"  %>
-          <!--a href="/users/16907"-->
-            <!--img class="attachment user profile_image fallback" src="/assets/no-image-icon-d3f9e11….jpg"-->
+          <%= attachment_image_tag @user, :profile_image, size: "40x40", fallback: "no_image.jpg"  %>
             <br>
-              <%= link_to user_path, class: "text-dark" do %>
+              <%= link_to user_path(@user.id) do %>
               <span> <%= @user.name %></span>
               <% end %>
-            </br
+            </br>
         </td>
         <td>
           <%= link_to book_path(@book.id) do %>
@@ -29,14 +27,14 @@
         <td><%= @book.body %></td>
         <% if @user.id == current_user.id %>
         <td>
-          <%= link_to 'Edit', edit_book_path(@book.id), class: "btn btn-secondary" %>
+          <%= link_to 'Edit', edit_book_path(@book.id), class: "btn btn-sm btn-success" %>
         </td>
         <% end %>
         <% if @user.id == current_user.id %>
         <td>
-          <%= link_to 'Destroy', books_path, class: "btn btn-secondary" %>
+          <%= link_to 'Destroy', book_path(@book), class: "btn btn-sm btn-danger", method: :delete %>
         </td>
-        <% end xs
+        <% end %>
       </tr>
     </tbody>
   </table>
